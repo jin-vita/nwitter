@@ -4,6 +4,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 
 const Auth = () => {
@@ -36,6 +38,7 @@ const Auth = () => {
       }
       console.log(data);
     } catch (error) {
+      console.log(error);
       setError(error.message.split(":")[1]);
     }
   };
@@ -44,12 +47,21 @@ const Auth = () => {
     setNewAccont((prev) => !prev);
   };
 
-  const onSocialClick = (event) => {
+  const onSocialClick = async (event) => {
+    // const name = event.target.name;
     const {
       target: { name },
     } = event;
-    if (name === "google") {
-      console.log(event.target.name);
+    let provider;
+    try {
+      if (name === "google") {
+        console.log(event.target.name);
+        provider = new GoogleAuthProvider();
+      }
+      const result = await signInWithPopup(auth, provider);
+      // const token = crediential.accessToken;
+    } catch (error) {
+      console.log(error);
     }
   };
 
