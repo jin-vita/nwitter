@@ -58,8 +58,7 @@ const Auth = () => {
         console.log(event.target.name);
         provider = new GoogleAuthProvider();
       }
-      const result = await signInWithPopup(auth, provider);
-      // const token = crediential.accessToken;
+      await signInWithPopup(auth, provider);
     } catch (error) {
       console.log(error);
     }
